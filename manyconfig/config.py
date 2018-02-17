@@ -8,8 +8,10 @@ class InvalidConfigException(Exception):
 class Config:
     schema = None
 
-    def __init__(self, silent=True):
+    def __init__(self, silent=True, schema=None):
         self.silent = True
+        if schema:
+            self.schema = schema
 
     def load(self):
         data = self._load()
