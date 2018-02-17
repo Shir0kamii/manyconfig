@@ -15,4 +15,4 @@ class ManyConfig(Config):
         super(ManyConfig, self).__init__(**kwargs)
 
     def _load(self):
-        return merge(*[mc.load() for mc in reversed(self.metaconfigs)])
+        return merge(*[mc.load() for mc in self.metaconfigs])
