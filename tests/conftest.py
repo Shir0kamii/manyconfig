@@ -1,3 +1,4 @@
+import contextlib
 import os
 import sys
 
@@ -16,3 +17,14 @@ def Schema():
         bar = Integer()
 
     return schema
+
+
+@contextlib.contextmanager
+def tmp_env(**env):
+    old = {key: os.environ[key] for key in env.keys() if key in os.environ}
+    to_remove = [key for key in env.keys() if key not in os.environ]
+    os.environ.update(env)
+    yield os.environ
+    os.environ.update(old)
+    for key in to_remove:
+        os.environ.pop(key)
