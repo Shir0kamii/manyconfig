@@ -8,8 +8,8 @@ class InvalidConfigException(Exception):
 class Config:
     schema = None
 
-    def __init__(self, silent=True, schema=None):
-        self.silent = True
+    def __init__(self, silent=False, schema=None):
+        self.silent = silent
         if schema:
             self.schema = schema
 
@@ -23,5 +23,5 @@ class Config:
                 raise InvalidConfigException("Invalid configuration", errors)
         return data
 
-    def _load(self):
+    def _load(self):  # pragma: no cover
         pass

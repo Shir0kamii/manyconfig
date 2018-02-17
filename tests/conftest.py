@@ -1,17 +1,17 @@
 import os
 import sys
 
-sys.path.insert(0, os.curdir)
-
 import pytest
 
-from marshmallow import Schema
+from marshmallow import Schema as _Schema
 from marshmallow.fields import String, Integer
+
+sys.path.insert(0, os.curdir)
 
 
 @pytest.fixture(scope="session")
-def schema():
-    class schema(Schema):
+def Schema():
+    class schema(_Schema):
         foo = String(required=True)
         bar = Integer()
 

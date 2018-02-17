@@ -1,1 +1,1 @@
-from manyconfig.config import Config
+from manyconfig.config import Config, InvalidConfigException
