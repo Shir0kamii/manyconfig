@@ -4,6 +4,17 @@ from manyconfig import Config
 
 
 class EnvironmentConfig(Config):
+    """Pull configuration from environment
+
+    An environment variable is considered to be in a namespace if it begins by
+    it. That is, FOO_BAR is part of the FOO_ namespace.
+
+    All environment variables of the given namespace will be collected, and the
+    namespace removed from its beginning. It is then inserted in the
+    configuration with its value.
+
+    :param namespace: The namespace to pull from
+    """
 
     def __init__(self, namespace, **kwargs):
         self.namespace = namespace
