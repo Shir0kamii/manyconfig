@@ -1,9 +1,9 @@
 import json
 
-from manyconfig import Config
+from manyconfig import MetaConfig
 
 
-class FileConfig(Config):
+class FileMetaConfig(MetaConfig):
     """Pull configuration from a file.
 
     :param filepath: the path of the configuration file.
@@ -13,7 +13,7 @@ class FileConfig(Config):
     def __init__(self, filepath, binary=False, **kwargs):
         self.filepath = filepath
         self.mode = 'rb' if binary else 'r'
-        super(FileConfig, self).__init__(**kwargs)
+        super(FileMetaConfig, self).__init__(**kwargs)
 
     def _load(self):
         """Open the given file and call the parse abstract method."""
@@ -25,7 +25,7 @@ class FileConfig(Config):
         pass
 
 
-class JSONConfig(FileConfig):
+class JSONMetaConfig(FileMetaConfig):
     """Pull configuration from a JSON file."""
 
     def parse(self, file_object):

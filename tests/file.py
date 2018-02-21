@@ -1,6 +1,6 @@
 import json
 
-from manyconfig import JSONConfig
+from manyconfig import JSONMetaConfig
 
 
 def test_json(tmpdir):
@@ -8,5 +8,5 @@ def test_json(tmpdir):
     f = tmpdir.join("foo.json")
     s = json.dumps(d)
     f.write(s)
-    metaconfig = JSONConfig(str(f))
+    metaconfig = JSONMetaConfig(str(f))
     assert metaconfig.load() == d

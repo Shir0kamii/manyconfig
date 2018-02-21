@@ -1,5 +1,5 @@
-Concepts
-########
+Key concepts
+############
 
 Metaconfig
 ==========

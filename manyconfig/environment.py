@@ -1,9 +1,9 @@
 import os
 
-from manyconfig import Config
+from manyconfig import MetaConfig
 
 
-class EnvironmentConfig(Config):
+class EnvironmentMetaConfig(MetaConfig):
     """Pull configuration from environment
 
     An environment variable is considered to be in a namespace if it begins by
@@ -18,7 +18,7 @@ class EnvironmentConfig(Config):
 
     def __init__(self, namespace, **kwargs):
         self.namespace = namespace
-        super(EnvironmentConfig, self).__init__(**kwargs)
+        super(EnvironmentMetaConfig, self).__init__(**kwargs)
 
     def _load(self):
         ns_len = len(self.namespace)

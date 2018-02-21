@@ -1,4 +1,4 @@
-from manyconfig import Config
+from manyconfig import MetaConfig
 
 
 def merge(*configs):
@@ -13,7 +13,7 @@ def merge(*configs):
     return d
 
 
-class ManyConfig(Config):
+class ManyConfig(MetaConfig):
     """Pull configuration from many others.
 
     This class is the real plus-value of ManyConfig. It takes some
