@@ -10,7 +10,8 @@ Welcome to Manyconfig's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   concepts
+   basic
+   extending
    api
 
 
