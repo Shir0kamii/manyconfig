@@ -7,6 +7,21 @@ except ImportError:  # pragma: no cover
 from manyconfig import MetaConfig
 
 
+class InvalidFormatError(ValueError):
+    pass
+
+
+class DecoratorDict(dict):
+    def add(self, key):
+        def decorator(f):
+            self[key] = f
+            return f
+        return decorator
+
+
+format_parsers = DecoratorDict({"json": json.load})
+
+
 class FileMetaConfig(MetaConfig):
     """Pull configuration from a file.
 
@@ -14,41 +29,26 @@ class FileMetaConfig(MetaConfig):
     :param bool binary: Open the file in binary mode.
     """
 
-    def __init__(self, filepath, binary=False, **kwargs):
+    def __init__(self, format, filepath, binary=False, **kwargs):
+        if format not in format_parsers.keys():
+            raise InvalidFormatError("format not supported")
+        self.format = format
         self.filepath = filepath
         self.mode = 'rb' if binary else 'r'
         super(FileMetaConfig, self).__init__(**kwargs)
 
     def _load(self):
-        """Open the given file and call the parse abstract method."""
+        """Open the given file and call the adapted parser."""
+        parser = format_parsers.get(self.format)
         with open(self.filepath, mode=self.mode) as file_object:
-            return self.parse(file_object)
-
-    def parse(self, file_object):  # pragma: no cover
-        """Method to implement to parse the file object."""
-        pass
+            config = parser(file_object)
+        return config
 
 
-class JSONMetaConfig(FileMetaConfig):
-    """Pull configuration from a JSON file."""
-
-    def parse(self, file_object):
-        """Parse the JSON in the file."""
-        return json.load(file_object)
-
-
-class INIMetaConfig(FileMetaConfig):
-    """Pull configuration from an INI file."""
-
-    def __init__(self, *args, **kwargs):
-        config_parser = kwargs.pop("config_parser", None)
-        if not config_parser:
-            config_parser = ConfigParser()
-        self.config_parser = config_parser
-        super(INIMetaConfig, self).__init__(*args, **kwargs)
-
-    def parse(self, file_object):
-        """Parse the INI in the file."""
-        self.config_parser.readfp(file_object)
-        return {section: dict(self.config_parser.items(section))
-                for section in self.config_parser.sections()}
+@format_parsers.add("ini")
+def parse_ini(file_object):
+    """Parse the INI in the file."""
+    config_parser = ConfigParser()
+    config_parser.readfp(file_object)
+    return {section: dict(config_parser.items(section))
+            for section in config_parser.sections()}

@@ -1,6 +1,14 @@
 import json
 
-from manyconfig import INIMetaConfig, JSONMetaConfig
+import pytest
+
+from manyconfig import FileMetaConfig
+from manyconfig.file import InvalidFormatError
+
+
+def test_invalid_format():
+    with pytest.raises(InvalidFormatError):
+        FileMetaConfig("foo", str())
 
 
 def test_json(tmpdir):
@@ -8,7 +16,7 @@ def test_json(tmpdir):
     f = tmpdir.join("foo.json")
     s = json.dumps(d)
     f.write(s)
-    metaconfig = JSONMetaConfig(str(f))
+    metaconfig = FileMetaConfig("json", str(f))
     assert metaconfig.load() == d
 
 
@@ -22,6 +30,6 @@ baz = foo
 def test_ini(tmpdir):
     f = tmpdir.join("foo.ini")
     f.write(ini_text)
-    metaconfig = INIMetaConfig(str(f))
+    metaconfig = FileMetaConfig("ini", str(f))
     assert metaconfig.load() == {"foo": {"bar": "baz", "foo": "bar",
                                          "baz": "foo"}}
