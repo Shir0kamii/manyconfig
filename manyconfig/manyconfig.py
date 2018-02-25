@@ -1,4 +1,4 @@
-from manyconfig import Config
+from manyconfig import MetaConfig, InvalidConfigException
 
 
 def merge(*configs):
@@ -13,7 +13,7 @@ def merge(*configs):
     return d
 
 
-class ManyConfig(Config):
+class ManyConfig(MetaConfig):
     """Pull configuration from many others.
 
     This class is the real plus-value of ManyConfig. It takes some
@@ -34,3 +34,19 @@ class ManyConfig(Config):
 
     def _load(self):
         return merge(*[mc.load() for mc in self.metaconfigs])
+
+
+class AnyConfig(ManyConfig):
+    """Pull configuration from the first existing source
+
+    It will iter through the different MetaConfig given and yield the first
+    non-empty valid configuration.
+
+    :param metaconfigs: A list of configurations to pull values from
+    """
+
+    def _load(self):
+        for metaconfig in self.metaconfigs:
+            config = metaconfig.load()
+            if config:
+                return config

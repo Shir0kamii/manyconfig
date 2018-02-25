@@ -1,3 +1,3 @@
-from manyconfig.config import Config, InvalidConfigException
-from manyconfig.environment import EnvironmentConfig
-from manyconfig.file import FileConfig, JSONConfig
+from manyconfig.config import MetaConfig, InvalidConfigException
+from manyconfig.environment import EnvironmentMetaConfig
+from manyconfig.file import FileMetaConfig
