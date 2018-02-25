@@ -6,8 +6,17 @@ python:
     - "3.5"
     - "3.6"
 
+env:
+    matrix:
+        - TWINE_USERNAME=shir0kamii
+    global:
+        secure: "h2kk56QHJabWvjC2/O860h8mbWX+owpkFXFeAV8ZrfsJfpvyjtL+9Wk49ZQFztqh3sIUVOyOusJMq6qIVTjj59xJHEcgFFRXZdQ+X10EvIDSfkLttpbJmQw1UL1FCEEvf3xAAVKR2n3sac0Rc+xsTst2kJWs8V8zDp3f1JfLOQREqRBYuLlwWudQvrgyPaDp1h50AAow0AvvgatpFxa9PVeAEpBE/6joNSBWmDwgEGmP0keqp/f9x1z977JJnPyDt0At98xArNm8gXANeKLSxT6496nXyXOBfLQYu9W8kU8Mhjqgc+plYRuj0xs8mIh3IVv+L8fR5muROjOvu3HMMcEZIhvzimw1RkLthOd8tt3Km12tAvy/3vDEpJYOR6ldYWqVL/ipaMnReIyD9h3fZUEdzj+0+HL5pt42CU6dQXhyqvKYBhcP3CAzJSCKDlUEWgiKrqsNv7Q0pJWxNcf3Awi2qLj2/K3qXWohEYjkXnoP3uAZ2jSblmmLIVYLnq/tJUtQYOK4CzTHuOFFSUurWoOgDPPKP0cGH4E50/C2MxR3K5FzfAZi4lBLdE/tPM8IYgA26TzxGw1JNOMIsUX7MiqprFT/Coekuz99qhhRpQDQKdL4YAxMKUP+Urr+0UURWJvUqgFmRW7Kj6+Q8rrvXw8LzTFcYQJnNycqJx8oh3I="
+
 install:
-    - pip install -r dev-requirements.txt
+    - pip install -r dev-requirements.txt twine
 
 script:
     - py.test
+
+after_success:
+    - ./autodeploy.sh
