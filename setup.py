@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name="manyconfig",
-    version="0.1.0",
+    version="0.1.1",
     author="Shir0kamii",
     author_email="shir0kamii@gmail.com",
     description="An easy-to-use declarative loader of configuration",
