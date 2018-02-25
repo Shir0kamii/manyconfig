@@ -1,7 +1,6 @@
 TODO
 ====
 
-* documentation
 * logging
 * More file formats
   * Yaml
