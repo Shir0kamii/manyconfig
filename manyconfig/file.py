@@ -4,7 +4,7 @@ try:
 except ImportError:  # pragma: no cover
     from ConfigParser import ConfigParser
 
-from manyconfig import MetaConfig
+from .config import MetaConfig
 
 
 class InvalidFormatError(ValueError):

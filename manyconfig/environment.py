@@ -1,6 +1,6 @@
 import os
 
-from manyconfig import MetaConfig
+from .config import MetaConfig
 
 
 class EnvironmentMetaConfig(MetaConfig):

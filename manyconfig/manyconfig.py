@@ -1,4 +1,4 @@
-from manyconfig import MetaConfig, InvalidConfigException
+from .config import MetaConfig, InvalidConfigException
 
 
 def merge(*configs):
