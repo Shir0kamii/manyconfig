@@ -3,7 +3,7 @@ set -ev
 
 if [ ! -z "$TRAVIS_TAG" ]; then
 	if [[ "$(python -V)" == *3.5* ]]; then
-		python setup.py sdist bdist_wheel
+		python setup.py sdist bdist_wheel --universal
 		twine upload dist/*
 		echo "Published version $TRAVIS_TAG to PyPi"
 	else
