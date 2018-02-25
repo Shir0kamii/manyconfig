@@ -6,7 +6,7 @@ class InvalidConfigException(Exception):
         self.errors = errors
 
 
-class MetaConfig:
+class MetaConfig(object):
     """Base class for metaconfigurations.
 
     A schema passed at instantiation override any schema set at level class.
