@@ -74,8 +74,14 @@ instanciated schema to the MetaConfig block when you build it.
         verbosity_level = Integer()
 
     
-    metaconfig = FileMetaConfig("json", "foo.json")
+    metaconfig = FileMetaConfig("json", "foo.json", schema=ConfigSchema())
     config = metaconfig.load()
     # yields something like {"database": "sql://foo", "verbosity_level": 42}
+
+It can also be overriden at load time:
+
+.. code-block:: python
+
+    config = metaconfig.load(schema=SomeOtherSchema())
 
 .. _Marshmallow: http://marshmallow.readthedocs.io/
