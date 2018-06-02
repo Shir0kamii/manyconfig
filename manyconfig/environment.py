@@ -7,7 +7,7 @@ class EnvironmentMetaConfig(MetaConfig):
     """Pull configuration from environment
 
     An environment variable is considered to be in a namespace if it begins by
-    it. That is, FOO_BAR is part of the FOO_ namespace.
+    it. That is, FOO_BAR is part of the FOO\_ namespace.
 
     All environment variables of the given namespace will be collected, and the
     namespace removed from its beginning. It is then inserted in the
