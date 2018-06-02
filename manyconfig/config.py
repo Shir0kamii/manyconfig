@@ -23,14 +23,15 @@ class MetaConfig(object):
         if schema:
             self.schema = schema
 
-    def load(self):
+    def load(self, schema=None):
         """Load the configuration
 
         :return dict: Dict representing the configuration
         """
         data = self._load()
-        if self.schema:
-            data, errors = self.schema.load(data)
+        schema = schema or self.schema
+        if schema:
+            data, errors = schema.load(data)
             if errors and self.silent:
                 return {}
             elif errors:
