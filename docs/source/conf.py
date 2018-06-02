@@ -37,7 +37,7 @@ author = 'Shir0kamii'
 # built documents.
 #
 # The short X.Y version.
-version = '0.1.1'
+version = '1.0.0'
 
 
 # -- Options for HTML output ----------------------------------------------
