@@ -3,6 +3,11 @@ Manyconfig
 
 An easy-to-use declarative loader of configuration
 
+Status
+======
+
+Manyconfig is maintained, feel free to open issues or pull requests.
+
 What does it do?
 ================
 
